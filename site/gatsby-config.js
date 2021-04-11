@@ -13,26 +13,26 @@ module.exports = {
   // Customize your site metadata:
   siteMetadata: {
     //General Site Metadata
-    title: 'FlexiBlog Theme',
-    name: 'FlexiBlog',
-    description: 'My site description...',
-    address: 'New York, NY',
-    email: 'email@example.com',
-    phone: '+1 (888) 888-8888',
+    title: 'Code. Money. Travel.',
+    name: 'Personal Blog',
+    description: 'Talk about coding, investment, money management, and interesting place.',
+    address: 'Bekasi, Jawa Barat',
+    email: 'iqbalhamdani27@gmail.com',
+    phone: '+62 821 4555 1404',
 
     //Site Social Media Links
     social: [
       {
-        name: 'Github',
-        url: 'https://github.com/gatsbyjs'
+        "name": "Github",
+        "url": "https://github.com/miqbalhamdani"
       },
       {
-        name: 'Twitter',
-        url: 'https://twitter.com/gatsbyjs'
+        "name": "Linkedin",
+        "url": "https://www.linkedin.com/in/iqbalhamdani/"
       },
       {
-        name: 'Instagram',
-        url: 'https://github.com/gatsbyjs'
+        "name": "Instagram",
+        "url": "https://www.instagram.com/m.iqbal.hamdani/"
       }
     ],
 
@@ -42,14 +42,6 @@ module.exports = {
         name: 'Home',
         slug: '/'
       },
-      {
-        name: 'About Me',
-        slug: '/about'
-      },
-      {
-        name: 'Contact',
-        slug: '/contact'
-      }
     ],
 
     //Footer Menu Items (2 Sets)
@@ -59,15 +51,15 @@ module.exports = {
         items: [
           {
             name: 'Advertise with us',
-            slug: '/contact'
+            slug: '/'
           },
           {
             name: 'About Us',
-            slug: '/about'
+            slug: '/'
           },
           {
             name: 'Contact Us',
-            slug: '/contact'
+            slug: '/'
           }
         ]
       },
