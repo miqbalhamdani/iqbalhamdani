@@ -1,0 +1,80 @@
+---
+title: Unit Testing Vue 3 with Jest [Part-1]
+category: Code
+tags: ['#javascript', '#vue', '#jest']
+keywords: ['#javascript', '#vue3', '#vue', '#unit-testing', '#jest']
+date: 2021-04-23
+thumbnail: unit-test.png
+featured: true
+---
+What exactly should we be testing in our applications? its just components. we need to be testing their individual behavior to make sure they’re working correctly.
+
+The goal of unit testing is purely to ensure your components are producing the expected results. We aren’t concerned here about how it arrived at that result. We may even change the way we’re logically arriving at that result later on, so we don’t want our tests to be unnecessarily prescriptive about how that ought to be achieved.
+
+### What NOT to test?
+- Don’t test implementation details
+- Don’t test the framework Itself
+- Don’t test third party libraries
+
+
+## Setup package.json
+
+### package.json
+```json
+"scripts": {
+  ...
+  "test:unit": "vue-cli-service test:unit"
+},
+
+"devDependencies": {
+  "@vue/cli-plugin-unit-jest": "^3.11.0",
+  "@vue/test-utils": "1.0.0-beta.29"
+}
+```
+
+## Testing with data()
+
+### AppHeader.vue
+```js
+<template>
+  <div>
+    <button v-show="loggedIn">Logout</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loggedIn: false
+    }
+  }
+}
+</script>
+```
+
+### AppHeader.spec.js
+```js
+import { mount } from '@vue/test-utils'
+import AppHeader from '@/components/AppHeader'
+
+describe('AppHeader', () => {
+  test('if user is not logged in, do not show logout button', () => {
+    const wrapper = mount(AppHeader) // mounting the component
+    expect(wrapper.find('button').isVisible()).toBe(false)
+  })
+
+  test('if user is logged in, show logout button', async () => {
+    const wrapper = mount(AppHeader) // mounting the component
+    wrapper.setData({ loggedIn: true }) // setting our data value
+    await wrapper.vm.$nextTick() // using async/await when waiting on DOM updates
+    expect(wrapper.find('button').isVisible()).toBe(true)
+  })
+})
+```
+
+We’re using the wrapper’s built-in setData() method to set our data to fit the correct scenario that we’re testing. We’ll add async just before the callback, and after we set the data, we’ll wait for DOM updates to happen. By using nextTick() we can tell our test to wait for those DOM updates before moving on to the assertion.
+
+
+Source:
+https://www.vuemastery.com/courses/unit-testing-vue-3/what-to-test-vue-3
