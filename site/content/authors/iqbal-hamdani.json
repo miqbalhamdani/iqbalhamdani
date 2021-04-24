@@ -1,0 +1,21 @@
+{
+  "name": "Iqbal Hamdani",
+  "title": "Photographer",
+  "description": "Talk about coding, investment, money management, and interesting place.",
+  "thumbnail": "iqbal-hamdani.png",
+  "social": [
+    {
+      "name": "Github",
+      "url": "https://github.com/miqbalhamdani"
+    },
+    {
+      "name": "Linkedin",
+      "url": "https://www.linkedin.com/in/iqbalhamdani/"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/m.iqbal.hamdani/"
+    }
+  ],
+  "skills": []
+}

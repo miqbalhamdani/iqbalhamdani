@@ -1,0 +1,111 @@
+---
+title: ES6 functions are rarely people know
+category: Code
+tags: ['#javascript', '#es6']
+keywords: ['#javascript', '#es6', '#class', '#es7', '#export', '#import']
+date: 2021-04-11
+thumbnail: es6.jpeg
+featured: true
+---
+
+## Classes
+
+Classes are essentially blueprints for objects. Methods are simply functions attached to classes where properties are variables attached to classes.
+
+```js
+class Person {
+    name = 'Andi' // <= property
+    call = () => {...} // <= method
+}
+```
+
+## Inheritence
+
+Classes also support inheritence. If Person exteds Human, this method printGender can use on the person as well. If you are extending another class and you are implementing the constructor which you dont have to, then you have to add super().
+
+```js
+class Human {
+  constructor() {
+    this.gender = 'Male';
+  }
+
+  printGender() {
+    console.log(this.gender);
+  }
+}
+
+class Person extends Human {
+  constructor() {
+    super();
+    this.name = 'Andi';
+  }
+
+  printName() {
+    console.log(this.name);
+  }
+}
+
+const person = new Person();
+person.printName(); // Andi
+person.printGender(); // Male
+```
+
+## ES7
+
+Now there is a more modern syntax which spares us using this constructor function with next generation javascript. You can assign a property directly. And stores a function as a value.
+
+```js
+class Human {
+  gender = 'Male';
+
+  printGender = () => {
+    console.log(this.gender);
+  }
+}
+
+class Person extends Human {
+  name = 'Andi';
+
+  printName = () => {
+    console.log(this.name);
+  }
+}
+```
+
+## Import & Export
+
+default export
+```js
+// person.js
+const person = {
+  name: 'Andi'
+}
+
+export default person
+```
+
+name export
+```js
+// utility.js
+export const riding = () => {...};
+export const base_speed = 50;
+```
+
+```js
+// app.js
+import p from './person.js';
+p.name; // Andi
+
+import { riding } from './utility.js';
+riding;  // {...}
+
+import { base_speed as baseSpeed } from './utility.js';
+baseSpeed; // 50
+
+import * as u from './utility.js';
+u.base_speed; // 50
+```
+
+
+
+
