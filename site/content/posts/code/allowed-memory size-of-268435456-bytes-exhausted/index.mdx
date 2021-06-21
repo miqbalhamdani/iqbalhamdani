@@ -1,0 +1,210 @@
+---
+title: Allowed memory size of 268435456 bytes exhausted (tried to allocate 4198400 bytes) ?
+category: Code
+tags: ['#laravel', '#query']
+keywords: ['#laravel', '#php', '#query', '#eloquent', '#querybuilder', 'memoryexhausted']
+date: 2021-06-23
+thumbnail: exhausted-memory.png
+featured: true
+---
+
+After i trace further, this problem is come from to many query that i run. <br />
+How to check query time?  <br />
+and check sql query that generate from eloquent or query builder?
+
+#### Example Eloquent Query
+```js
+DB::enableQueryLog();
+
+$employee = Employee::select('id', 'name')
+    ->where('privilege', 'Pegawai')
+    ->limit(100)
+    ->get();
+
+dd(DB::getQueryLog());
+```
+
+#### Result
+```json
+array:1 [▼
+  0 => array:3 [▼
+    "query" => "select `id`, `name` from `employees` where `privilege` = ? and `employees`.`deleted_at` is null limit 100"
+    "bindings" => array:1 [▶]
+    "time" => 1.42
+  ]
+]
+```
+
+# Solution
+
+### 1. Select only the columns you need
+```js
+//When using eloquent
+$posts = Post::select(['id','title'])->get();
+
+//When using query builder
+$posts = DB::table('posts')->select(['id','title'])->get();
+```
+
+The above code will result in a query as below
+```sql
+select id,title from posts;
+```
+<br />
+<br />
+
+### 2. Count rows using query instead of collection
+from this
+```js
+//When using eloquent
+$posts = Post::all()->count();
+
+//When using query builder
+$posts = DB::table('posts')->get()->count();
+```
+
+to this
+```js
+//When using eloquent
+$posts = Post::count();
+
+//When using query builder
+$posts = DB::table('posts')->count();
+
+// This will generate the following query
+select count(*) from posts
+```
+
+<br />
+<br />
+
+### 3. Avoiding using with in relationship
+
+<b>DONT DO THIS</b>, because this relationships that should always be loaded every this model call.
+
+```js
+// Models/Post.php
+protected $with = [
+    'authors',
+    'categories',
+    'images',
+];
+```
+
+Do this for single relations
+```js
+$posts = Post::with(['author'])->get();
+
+// Executing the above code will result in running following queries.
+select * from authors where id in(
+  { post1.author_id },
+  { post2.author_id },
+  { post3.author_id },
+  { post4.author_id },
+  { post5.author_id }
+)
+```
+
+Do this for multiple relations
+```js
+$posts = Post::with(['author.team'])->get();
+
+// Executing the above code will result in running following queries.
+select * from authors where id in(
+  { post1.author_id },
+  { post2.author_id },
+  { post3.author_id },
+  { post4.author_id },
+  { post5.author_id }
+)
+
+select * from teams where id in(
+  { author1.team_id },
+  { author2.team_id },
+  { author3.team_id },
+  { author4.team_id },
+  { author5.team_id }
+)
+```
+
+<br />
+<br />
+
+### 4. Merge similar queries together
+```js
+// from this
+$published_posts = Post::where('status','=','published')->get();
+$featured_posts = Post::where('status','=','featured')->get();
+$scheduled_posts = Post::where('status','=','scheduled')->get();
+
+// to this
+$posts =  Post::whereIn('status',['published', 'featured', 'scheduled'])->get();
+$published_posts = $posts->where('status','=','published');
+$featured_posts = $posts->where('status','=','featured');
+$scheduled_posts = $posts->where('status','=','scheduled');
+```
+
+<br />
+<br />
+
+### 5. Add index to frequently queried columns
+```sh
+# use artisan command
+php artisan make:migration add_votes_to_users_table --table=users
+```
+
+```js
+Schema::table('posts', function (Blueprint $table) {
+    $table->index(['id', 'title', 'status', 'created_at']);
+});
+```
+
+<br />
+<br />
+
+### 6. Better way to retrieve latest rows from a table
+```js
+// from this
+$posts = Post::orderBy('created_at', 'desc')->get();
+
+// to this
+$posts = Post::latest('id')->get();
+```
+
+<br />
+<br />
+
+### 7. use Query Builder instead Eloquent
+```js
+// 12.6 seconds
+\App\Models\Post::query()->get();
+
+// 7.4 seconds
+\DB::table('posts')->get();
+```
+
+<br />
+<br />
+
+### 8. use Redis or Memcached for Query Caching
+Caching results of the queries which frequently accessed. Cache basically store queries made for the first time and use it for the next request for some period of time or forever stored.
+```js
+// cache all posts and then after 1 hours this posts will refetch again
+$posts = \Cache::remember('posts', 3600, function () use ($param) {
+    return \DB::table('posts')->get();
+});
+```
+
+<br />
+<br />
+<br />
+<br />
+
+
+Disclaimer:  <br />
+*Im using laravel 5.8*
+
+
+source: <br />
+https://dudi.dev/optimize-laravel-database-queries/ <br />
+https://hafiqiqmal93.medium.com/tips-to-speed-up-database-query-in-laravel-f194f624cb06
