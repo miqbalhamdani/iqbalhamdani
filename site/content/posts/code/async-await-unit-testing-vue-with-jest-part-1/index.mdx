@@ -1,15 +1,21 @@
 ---
-title: Unit Testing Vue 3 with Jest [1. Async Await]
+title: Async Await [Unit Testing Vue 3 with Jest Part 1]
 category: Code
 tags: ['#javascript', '#vue', '#jest']
-keywords: ['#javascript', '#vue3', '#vue', '#unit-testing', '#jest']
-date: 2021-04-23
+keywords: [vue, 'unit testing', 'jest', 'vue unit testing']
+date: 2021-06-18
 thumbnail: unit-test.png
-featured: true
+private: false
+draft: false
 ---
 What exactly should we be testing in our applications? its just components. we need to be testing their individual behavior to make sure they’re working correctly.
 
 The goal of unit testing is purely to ensure your components are producing the expected results. We aren’t concerned here about how it arrived at that result. We may even change the way we’re logically arriving at that result later on, so we don’t want our tests to be unnecessarily prescriptive about how that ought to be achieved.
+
+### Unit Testing Vue 3 with Jest Series
+1. **[Async Await](#)**
+
+<br />
 
 ### What NOT to test?
 - Don’t test implementation details
@@ -75,6 +81,9 @@ describe('AppHeader', () => {
 
 We’re using the wrapper’s built-in setData() method to set our data to fit the correct scenario that we’re testing. We’ll add async just before the callback, and after we set the data, we’ll wait for DOM updates to happen. By using nextTick() we can tell our test to wait for those DOM updates before moving on to the assertion.
 
+<br />
+<br />
+<br />
 
-Source:
+Source: <br />
 https://www.vuemastery.com/courses/unit-testing-vue-3/what-to-test-vue-3
