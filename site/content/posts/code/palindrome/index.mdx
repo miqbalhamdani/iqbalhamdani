@@ -1,0 +1,103 @@
+---
+title: Palindrome
+category: Code
+tags: ['#coding-interview']
+keywords: ['coding interview', 'palindrome', 'javascript']
+date: 2021-08-20
+thumbnail: palindrome.png
+private: false
+draft: false
+---
+
+***Palindrome*** adalah suatu kata, frasa, angka, maupun susunan lainnya apabila dibaca dari depan atau belakang bunyinya tetap sama.
+contoh: `katak`, `malam`, `ini`.
+
+Coding Interview Series:
+1. [Palindrome]()
+
+<br />
+<br />
+
+
+### Simple Way
+
+```js
+const isPalindrome = (str) => {
+  return str === str
+    .split("")
+    .reverse()
+    .join("");
+}
+```
+
+<br />
+
+### Without JavaScript Function
+
+```js
+const isPalindrome = (str) => {
+  let temp = '';
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    temp = temp + str.charAt(i)
+  }
+
+  return str === temp;
+}
+```
+
+<br />
+
+### Without Temp Variable
+
+```js
+const isPalindrome = (str) => {
+
+  for (let i = 0; i < str.length; i++) {
+
+  // or you can simplify by only check a half of str length.
+  // for (let i = 0; i < str.length; i++) {
+
+    const indexStart = i;
+    const indexEnd = str.length - i - 1;
+
+    if (str.charAt(indexStart) !== str.charAt(indexEnd)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+```
+
+<br />
+
+### Without Looping, Use Recursive
+
+```js
+const isPalindromeRecursive = (str, i) => {
+  if (i < str.length / 2) {
+    const indexStart = i;
+    const indexEnd = str.length - i - 1;
+
+    if (str.charAt(indexStart) !== str.charAt(indexEnd)) {
+      return false;
+    } else {
+      return isPalindromeRecursive (str, i+1);
+    }
+  } else {
+    return true;
+  }
+}
+
+const isPalindrome = (str) => {
+  return isPalindromeRecursive(str, 0);
+};
+```
+
+<br />
+<br />
+<br />
+
+source: <br />
+https://youtu.be/DXQuiPKl79Y
