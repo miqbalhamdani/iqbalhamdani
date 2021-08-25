@@ -6,6 +6,7 @@ import Divider from '@components/Divider'
 import Pagination from '@components/Pagination'
 import Seo from '@widgets/Seo'
 import Categories from '@widgets/Categories'
+import Referral from '@widgets/Referral'
 import Tags from '@widgets/Tags'
 import NewsletterCompact from '@widgets/NewsletterCompact'
 import Social from '@widgets/Social'
@@ -35,6 +36,8 @@ const Posts = ({ data: { paginatedPosts = {} }, ...props }) => {
         </Main>
         <Sidebar>
           <Categories categories={categories} />
+          <Divider />
+          <Referral />
           <Divider />
           <Tags tags={tags} />
           <Divider />

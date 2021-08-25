@@ -20,6 +20,11 @@ export const query = graphql`
           slug
         }
       }
+      referral {
+        label
+        name
+        url
+      }
       social {
         name
         url

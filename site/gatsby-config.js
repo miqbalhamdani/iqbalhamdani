@@ -20,6 +20,29 @@ module.exports = {
     email: 'iqbalhamdani27@gmail.com',
     phone: '+62 821 4555 1404',
 
+    referral: [
+      {
+        "label": "Bibit",
+        "name": "iqbalhamdani",
+        "url": "http://bit.ly/bibitreferral1"
+      },
+      {
+        "label": "Pluang",
+        "name": "MUHA147466",
+        "url": "https://pluang.onelink.me/jTjO/referral"
+      },
+      {
+        "label": "Ajaib",
+        "name": "miqb508",
+        "url": "https://referral.ajaib.co.id/TZDF"
+      },
+      {
+        "label": "Gotrade",
+        "name": "718216",
+        "url": "https://heygo.trade/app"
+      },
+    ],
+
     //Site Social Media Links
     social: [
       {
