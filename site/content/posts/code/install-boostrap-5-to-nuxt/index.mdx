@@ -1,0 +1,60 @@
+---
+title: Install Boostrap 5 to Nuxt
+category: Code
+tags: ['#nuxt', '#vuejs']
+keywords: ['nuxt', 'vuejs', 'boostrap', boostrap 5']
+date: 2022-01-01
+thumbnail: nuxt-boostrap.png
+private: false
+draft: true
+---
+
+We will install boostrap directly to boostrap without Vue UI Library. Its allow you to make uptodate and make more flexible.
+
+### Install Nuxt (if you're not installed before)
+
+```bash
+npm init nuxt-app <project-name>
+```
+
+<br />
+
+### Install Boostrap
+
+```bash
+npm install bootstrap
+```
+
+<br />
+
+### Install SASS dependency
+
+Because we use sass for boostrap styling, we need to install sass dependency. Because we use node 12, we need to install with compatible library.
+
+```bash
+npm install node-sass@4 sass-loader@10  --save-dev
+```
+
+<br />
+
+### Import boostrap file
+
+```scss
+// assets/scss/app.scss
+@import "~bootstrap/scss/bootstrap";
+```
+
+please create your own folder, because nuxt didnt provide it.
+
+<br />
+
+### Set Config
+
+You can inject app.scss that you already create before, to nuxt config.
+
+```js
+// nuxt.config.js // line 20
+css: [
+  '~/assets/scss/app.scss',
+],
+```

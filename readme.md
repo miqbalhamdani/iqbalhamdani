@@ -1,6 +1,6 @@
 ## ***Money***
 
-- Personal Finance 📋 [2, 3]
+- Personal Finance 📋 [3]
 - Income 101
 - Membeli Rumah Pertama ✅
 - Reksadana
@@ -24,3 +24,5 @@
 - Misteraladin Test
 - Rakuten Asia Test
 - Tiket.com Test
+- Composition API ✅
+- Install boostrap 5 to nuxt ✅
