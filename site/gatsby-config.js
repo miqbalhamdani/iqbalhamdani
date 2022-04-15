@@ -7,8 +7,13 @@ module.exports = {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
         // The property ID; the tracking code won't be generated without it
-        trackingId: 'G-L78N927DYB'
+        // trackingId: 'G-L78N927DYB'
+        trackingId: '311270522'
       }
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {}
     },
     {
       resolve: '@elegantstack/gatsby-theme-flexiblog-personal',
@@ -26,6 +31,7 @@ module.exports = {
     address: 'Bekasi, Jawa Barat',
     email: 'iqbalhamdani27@gmail.com',
     phone: '+62 821 4555 1404',
+    siteUrl: "https://iqbalhamdani.id",
 
     referral: [
       {
