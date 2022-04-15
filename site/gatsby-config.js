@@ -7,8 +7,7 @@ module.exports = {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
         // The property ID; the tracking code won't be generated without it
-        // trackingId: 'G-L78N927DYB'
-        trackingId: '311270522'
+        trackingId: 'G-L78N927DYB'
       }
     },
     {
