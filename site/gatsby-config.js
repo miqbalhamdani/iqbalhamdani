@@ -4,11 +4,15 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        // The property ID; the tracking code won't be generated without it
-        trackingId: 'G-L78N927DYB'
-      }
+        trackingIds: [
+          "G-L78N927DYB",
+        ],
+        pluginConfig: {
+          head: true,
+        },
+      },
     },
     {
       resolve: 'gatsby-plugin-sitemap',
